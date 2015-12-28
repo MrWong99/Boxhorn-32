@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="vitting" size="1195.000000 1787.453491" />
+    <ImageTarget name="sensorisch" size="2071.000000 2929.288574" />
+    <ImageTarget name="rocket" size="2308.000000 3306.954834" />
+    <ImageTarget name="ratkovski" size="701.000000 927.259338" />
+    <ImageTarget name="lounge_chair" size="1461.000000 1096.507202" />
+    <ImageTarget name="ichbindannmal" size="1398.000000 2926.210938" />
+    <ImageTarget name="hover_blue" size="1884.000000 1244.893921" />
+    <ImageTarget name="gross" size="1267.000000 1426.510742" />
+    <ImageTarget name="egg_chair" size="858.000000 1142.654175" />
+    <ImageTarget name="barcelona_chair" size="815.000000 938.209412" />
+    <ImageTarget name="320licht" size="1930.000000 1283.636841" />
+  </Tracking>
+</QCARConfig>
