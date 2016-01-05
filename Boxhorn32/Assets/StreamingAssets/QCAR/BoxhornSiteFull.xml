@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="ar_seiten_2-page-002" size="2315.000000 3306.000000" />
+    <ImageTarget name="ar_seiten_2-page-001" size="2317.000000 3306.000000" />
+    <ImageTarget name="ar_seiten_1-page-010" size="2317.000000 3306.000000" />
+    <ImageTarget name="ar_seiten_1-page-009" size="1585.000000 1501.000000" />
+    <ImageTarget name="ar_seiten_1-page-008" size="1941.000000 1293.000000" />
+    <ImageTarget name="ar_seiten_1-page-007" size="1995.000000 1421.000000" />
+    <ImageTarget name="ar_seiten_1-page-006" size="1083.000000 1217.000000" />
+    <ImageTarget name="ar_seiten_1-page-005_2" size="1389.000000 1073.000000" />
+    <ImageTarget name="ar_seiten_1-page-005_1" size="1053.000000 917.000000" />
+    <ImageTarget name="ar_seiten_1-page-004" size="1407.000000 915.000000" />
+    <ImageTarget name="ar_seiten_1-page-003" size="2317.000000 3306.000000" />
+    <ImageTarget name="ar_seiten_1-page-002" size="1253.000000 1895.000000" />
+    <ImageTarget name="ar_seiten_1-page-001" size="1123.000000 2817.000000" />
+  </Tracking>
+</QCARConfig>
