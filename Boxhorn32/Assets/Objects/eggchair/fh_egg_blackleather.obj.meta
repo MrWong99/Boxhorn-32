@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: 53ab25fccd7d4814f9bd7746e2a4bae2
+timeCreated: 1452513974
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: fh_egg_m_b_fh_egg
+    100004: fh_egg_m_b_fh_egg_cus
+    100006: fh_egg_m_b_fh_egg_fe0
+    100008: fh_egg_m_b_fh_egg_fe1
+    100010: fh_egg_m_b_fh_egg_fe2
+    100012: fh_egg_m_b_fh_egg_fe3
+    100014: fh_egg_m_b_fh_egg_fee
+    100016: fh_egg_m_b_fh_egg_han
+    100018: fh_egg_m_b_fh_egg_pip
+    100020: fh_egg_m_b_Leather_ci
+    100022: fh_egg_m_b_Obj_04
+    400000: //RootNode
+    400002: fh_egg_m_b_fh_egg
+    400004: fh_egg_m_b_fh_egg_cus
+    400006: fh_egg_m_b_fh_egg_fe0
+    400008: fh_egg_m_b_fh_egg_fe1
+    400010: fh_egg_m_b_fh_egg_fe2
+    400012: fh_egg_m_b_fh_egg_fe3
+    400014: fh_egg_m_b_fh_egg_fee
+    400016: fh_egg_m_b_fh_egg_han
+    400018: fh_egg_m_b_fh_egg_pip
+    400020: fh_egg_m_b_Leather_ci
+    400022: fh_egg_m_b_Obj_04
+    2300000: fh_egg_m_b_fh_egg
+    2300002: fh_egg_m_b_fh_egg_cus
+    2300004: fh_egg_m_b_fh_egg_fe0
+    2300006: fh_egg_m_b_fh_egg_fe1
+    2300008: fh_egg_m_b_fh_egg_fe2
+    2300010: fh_egg_m_b_fh_egg_fe3
+    2300012: fh_egg_m_b_fh_egg_fee
+    2300014: fh_egg_m_b_fh_egg_han
+    2300016: fh_egg_m_b_fh_egg_pip
+    2300018: fh_egg_m_b_Leather_ci
+    2300020: fh_egg_m_b_Obj_04
+    3300000: fh_egg_m_b_fh_egg
+    3300002: fh_egg_m_b_fh_egg_cus
+    3300004: fh_egg_m_b_fh_egg_fe0
+    3300006: fh_egg_m_b_fh_egg_fe1
+    3300008: fh_egg_m_b_fh_egg_fe2
+    3300010: fh_egg_m_b_fh_egg_fe3
+    3300012: fh_egg_m_b_fh_egg_fee
+    3300014: fh_egg_m_b_fh_egg_han
+    3300016: fh_egg_m_b_fh_egg_pip
+    3300018: fh_egg_m_b_Leather_ci
+    3300020: fh_egg_m_b_Obj_04
+    4300000: fh_egg_m_b_fh_egg
+    4300002: fh_egg_m_b_fh_egg_cus
+    4300004: fh_egg_m_b_fh_egg_fe0
+    4300006: fh_egg_m_b_fh_egg_fe1
+    4300008: fh_egg_m_b_fh_egg_fe2
+    4300010: fh_egg_m_b_fh_egg_fe3
+    4300012: fh_egg_m_b_fh_egg_fee
+    4300014: fh_egg_m_b_fh_egg_han
+    4300016: fh_egg_m_b_fh_egg_pip
+    4300018: fh_egg_m_b_Leather_ci
+    4300020: fh_egg_m_b_Obj_04
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
