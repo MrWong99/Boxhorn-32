@@ -4,6 +4,7 @@ All Rights Reserved.
 Confidential and Proprietary - Qualcomm Connected Experiences, Inc.
 ==============================================================================*/
 
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ namespace Vuforia
         #region PRIVATE_MEMBER_VARIABLES
 
         private TrackableBehaviour mTrackableBehaviour;
+
+        private static bool DownloadWarningShown = false;
 
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -79,26 +82,52 @@ namespace Vuforia
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 
-            if (PlayVideo)
+            if (Application.internetReachability != NetworkReachability.NotReachable)
             {
-                Screen.orientation = ScreenOrientation.LandscapeRight;
-                yield return new WaitForSeconds(0.5f);
+                if (!DownloadWarningShown && Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
+                {
+                    ShowDownloadWarning();
+                    DownloadWarningShown = true;
+                    yield return new WaitForSeconds(2);
+                }
 
-                Handheld.PlayFullScreenMovie(URL, BgColor, ControlMode, ScalingMode);
+                if (PlayVideo)
+                {
+                    Screen.orientation = ScreenOrientation.LandscapeRight;
+                    yield return new WaitForSeconds(0.5f);
 
-                yield return new WaitForSeconds(3);
-                Screen.orientation = ScreenOrientation.Portrait;
+                    Handheld.PlayFullScreenMovie(URL, BgColor, ControlMode, ScalingMode);
+
+                    yield return new WaitForSeconds(3);
+                    Screen.orientation = ScreenOrientation.Portrait;
+                }
+                else
+                {
+                    Application.OpenURL(URL);
+                }
             }
             else
             {
-                Application.OpenURL(URL);
+                ShowNoConnectionError();
+                yield return new WaitForSeconds(3);
             }
         }
-
 
         private void OnTrackingLost()
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+        }
+
+        private void ShowDownloadWarning()
+        {
+            // TODO insert code to display alert note
+            throw new NotImplementedException();
+        }
+
+        private void ShowNoConnectionError()
+        {
+            // TODO insert code to notify user that no internet connection exists
+            throw new NotImplementedException();
         }
 
         #endregion // PRIVATE_METHODS
