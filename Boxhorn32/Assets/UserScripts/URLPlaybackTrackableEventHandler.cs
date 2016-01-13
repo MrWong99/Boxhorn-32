@@ -4,6 +4,7 @@ All Rights Reserved.
 Confidential and Proprietary - Qualcomm Connected Experiences, Inc.
 ==============================================================================*/
 
+using System.Collections;
 using UnityEngine;
 
 namespace Vuforia
@@ -11,7 +12,7 @@ namespace Vuforia
     /// <summary>
     /// A custom handler that implements the ITrackableEventHandler interface.
     /// </summary>
-    public class VideoPlaybackTrackableEventHandler : MonoBehaviour,
+    public class URLPlaybackTrackableEventHandler : MonoBehaviour,
                                                 ITrackableEventHandler
     {
         #region PRIVATE_MEMBER_VARIABLES
@@ -22,13 +23,15 @@ namespace Vuforia
 
         #region PUBLIC_MEMBER_VARIABLES
 
-        public string videoURL;
+        public string URL;
 
-        public Color bgColor;
+        public bool PlayVideo;
 
-        public FullScreenMovieControlMode controlMode;
+        public Color BgColor;
 
-        public FullScreenMovieScalingMode scalingMode;
+        public FullScreenMovieControlMode ControlMode;
+
+        public FullScreenMovieScalingMode ScalingMode;
 
         #endregion PUBLIC_MEMBER_VARIABLES // PUBLIC_MEMBER_VARIABLES
 
@@ -45,8 +48,6 @@ namespace Vuforia
 
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
 
-
-
         #region PUBLIC_METHODS
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
-                OnTrackingFound();
+                StartCoroutine(OnTrackingFound());
             }
             else
             {
@@ -71,16 +72,27 @@ namespace Vuforia
 
         #endregion // PUBLIC_METHODS
 
-
-
         #region PRIVATE_METHODS
 
 
-        private void OnTrackingFound()
+        private IEnumerator OnTrackingFound()
         {
-            Handheld.PlayFullScreenMovie(videoURL, bgColor, controlMode, scalingMode);
-
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+
+            if (PlayVideo)
+            {
+                Screen.orientation = ScreenOrientation.LandscapeRight;
+                yield return new WaitForSeconds(0.5f);
+
+                Handheld.PlayFullScreenMovie(URL, BgColor, ControlMode, ScalingMode);
+
+                yield return new WaitForSeconds(3);
+                Screen.orientation = ScreenOrientation.Portrait;
+            }
+            else
+            {
+                Application.OpenURL(URL);
+            }
         }
 
 
