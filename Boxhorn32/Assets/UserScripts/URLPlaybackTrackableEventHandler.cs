@@ -22,6 +22,12 @@ namespace Vuforia
 
         private static bool DownloadWarningShown = false;
 
+        private Color BgColor = new Color(155, 185, 255, 0);
+
+        private FullScreenMovieControlMode ControlMode = FullScreenMovieControlMode.Full;
+
+        private FullScreenMovieScalingMode ScalingMode = FullScreenMovieScalingMode.AspectFit;
+
         #endregion // PRIVATE_MEMBER_VARIABLES
 
         #region PUBLIC_MEMBER_VARIABLES
@@ -30,11 +36,9 @@ namespace Vuforia
 
         public bool PlayVideo;
 
-        public Color BgColor;
+        public GameObject NoConnectionDisplay;
 
-        public FullScreenMovieControlMode ControlMode;
-
-        public FullScreenMovieScalingMode ScalingMode;
+        public GameObject WLANWarningDisplay;
 
         #endregion PUBLIC_MEMBER_VARIABLES // PUBLIC_MEMBER_VARIABLES
 
@@ -86,9 +90,10 @@ namespace Vuforia
             {
                 if (!DownloadWarningShown && Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
                 {
-                    ShowDownloadWarning();
+                    float time = 2.5f;
+                    StartCoroutine(ShowDownloadWarning(time));
                     DownloadWarningShown = true;
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(time);
                 }
 
                 if (PlayVideo)
@@ -108,8 +113,9 @@ namespace Vuforia
             }
             else
             {
-                ShowNoConnectionError();
-                yield return new WaitForSeconds(3);
+                float time = 3;
+                StartCoroutine(ShowNoConnectionError(time));
+                yield return new WaitForSeconds(time);
             }
         }
 
@@ -118,16 +124,18 @@ namespace Vuforia
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
 
-        private void ShowDownloadWarning()
+        private IEnumerator ShowDownloadWarning(float time)
         {
-            // TODO insert code to display alert note
-            throw new NotImplementedException();
+            WLANWarningDisplay.SetActive(true);
+            yield return new WaitForSeconds(time);
+            WLANWarningDisplay.SetActive(false);
         }
 
-        private void ShowNoConnectionError()
+        private IEnumerator ShowNoConnectionError(float time)
         {
-            // TODO insert code to notify user that no internet connection exists
-            throw new NotImplementedException();
+            NoConnectionDisplay.SetActive(true);
+            yield return new WaitForSeconds(time);
+            NoConnectionDisplay.SetActive(false);
         }
 
         #endregion // PRIVATE_METHODS
