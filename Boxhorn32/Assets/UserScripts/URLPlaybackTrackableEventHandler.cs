@@ -69,12 +69,24 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
-                StartCoroutine(OnTrackingFound());
+                StartCoroutine(OpenWeb(URL, PlayVideo));
             }
-            else
-            {
-                OnTrackingLost();
-            }
+        }
+
+        public void OpenURL(string URL)
+        {
+            StartCoroutine(OpenWeb(URL, false));
+        }
+
+        public void OpenVideo(string URL)
+        {
+            StartCoroutine(OpenWeb(URL, true));
+        }
+
+        public void OpenMail(string Receiver)
+        {
+            string MailString = "mailto:" + Receiver + "?subject=" + MyEscapeURL("") + "&body=" + MyEscapeURL("");
+            StartCoroutine(OpenWeb(MailString, false));
         }
 
         #endregion // PUBLIC_METHODS
@@ -82,13 +94,11 @@ namespace Vuforia
         #region PRIVATE_METHODS
 
 
-        private IEnumerator OnTrackingFound()
+        private IEnumerator OpenWeb(string URL, bool PlayVideo)
         {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
-
             if (Application.internetReachability != NetworkReachability.NotReachable)
             {
-                if (!DownloadWarningShown && Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
+                if (!DownloadWarningShown && PlayVideo && Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
                 {
                     float time = 2.5f;
                     StartCoroutine(ShowDownloadWarning(time));
@@ -119,11 +129,6 @@ namespace Vuforia
             }
         }
 
-        private void OnTrackingLost()
-        {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-        }
-
         private IEnumerator ShowDownloadWarning(float time)
         {
             WLANWarningDisplay.SetActive(true);
@@ -136,6 +141,11 @@ namespace Vuforia
             NoConnectionDisplay.SetActive(true);
             yield return new WaitForSeconds(time);
             NoConnectionDisplay.SetActive(false);
+        }
+
+        private string MyEscapeURL(string URL)
+        {
+            return WWW.EscapeURL(URL).Replace("+", "%20");
         }
 
         #endregion // PRIVATE_METHODS
