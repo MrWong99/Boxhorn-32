@@ -32,6 +32,8 @@ namespace Vuforia
 
         #region PUBLIC_MEMBER_VARIABLES
 
+        public bool ShowNotifications;
+
         public string URL;
 
         public bool PlayVideo;
@@ -131,16 +133,22 @@ namespace Vuforia
 
         private IEnumerator ShowDownloadWarning(float time)
         {
-            WLANWarningDisplay.SetActive(true);
-            yield return new WaitForSeconds(time);
-            WLANWarningDisplay.SetActive(false);
+            if (ShowNotifications)
+            {
+                WLANWarningDisplay.SetActive(true);
+                yield return new WaitForSeconds(time);
+                WLANWarningDisplay.SetActive(false);
+            }
         }
 
         private IEnumerator ShowNoConnectionError(float time)
         {
-            NoConnectionDisplay.SetActive(true);
-            yield return new WaitForSeconds(time);
-            NoConnectionDisplay.SetActive(false);
+            if (ShowNotifications)
+            {
+                NoConnectionDisplay.SetActive(true);
+                yield return new WaitForSeconds(time);
+                NoConnectionDisplay.SetActive(false);
+            }
         }
 
         private string MyEscapeURL(string URL)
