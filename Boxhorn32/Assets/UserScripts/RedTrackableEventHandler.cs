@@ -110,7 +110,7 @@ namespace Vuforia
                 component.enabled = false;
             }
 
-            CameraDevice.Instance.SetFocusMode(arCamera.GetComponent<FocusAndLight>().focusMode);
+            CameraDevice.Instance.SetFocusMode(arCamera.GetComponent<FocusAndLight>().FocusMode);
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }

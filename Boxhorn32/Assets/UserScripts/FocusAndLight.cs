@@ -4,29 +4,45 @@ using Vuforia;
 public class FocusAndLight : MonoBehaviour
 {
 
-    public bool useTorch;
+    public bool UseTorch;
 
-    public CameraDevice.FocusMode focusMode;
+    public CameraDevice.FocusMode FocusMode;
+
+    private bool LastTorchState;
 
     // Use this for initialization
     void Start()
     {
-        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(abc);
-        VuforiaBehaviour.Instance.RegisterOnPauseCallback(xyz);
+        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(SetFocusAndTorch);
+        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPauseTorch);
     }
 
-    private void abc()
+    public void SwitchTorchMode()
     {
-        CameraDevice.Instance.SetFocusMode(focusMode);
-        CameraDevice.Instance.SetFlashTorchMode(useTorch);
+        bool NewState = !LastTorchState;
+        CameraDevice.Instance.SetFlashTorchMode(NewState);
+        LastTorchState = NewState;
     }
 
-    private void xyz(bool paused)
+    public void SetFocusMode(CameraDevice.FocusMode FocusMode)
+    {
+        CameraDevice.Instance.SetFocusMode(FocusMode);
+    }
+
+    private void SetFocusAndTorch()
+    {
+        CameraDevice.Instance.SetFocusMode(FocusMode);
+        CameraDevice.Instance.SetFlashTorchMode(UseTorch);
+        LastTorchState = UseTorch;
+    }
+
+    private void OnPauseTorch(bool paused)
     {
         if (!paused)
         {
-            CameraDevice.Instance.SetFocusMode(focusMode);
-            CameraDevice.Instance.SetFlashTorchMode(useTorch);
+            CameraDevice.Instance.SetFocusMode(FocusMode);
+            CameraDevice.Instance.SetFlashTorchMode(UseTorch);
+            LastTorchState = UseTorch;
         }
     }
 }
