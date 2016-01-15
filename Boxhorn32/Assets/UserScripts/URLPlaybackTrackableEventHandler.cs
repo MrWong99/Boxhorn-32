@@ -32,15 +32,9 @@ namespace Vuforia
 
         #region PUBLIC_MEMBER_VARIABLES
 
-        public bool ShowNotifications;
-
         public string URL;
 
         public bool PlayVideo;
-
-        public GameObject NoConnectionDisplay;
-
-        public GameObject WLANWarningDisplay;
 
         #endregion PUBLIC_MEMBER_VARIABLES // PUBLIC_MEMBER_VARIABLES
 
@@ -71,84 +65,45 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
-                StartCoroutine(OpenWeb(URL, PlayVideo));
+                if (PlayVideo)
+                {
+                    OpenVideo(URL);
+                } else
+                {
+                    OpenURL(URL);
+                }
             }
         }
 
         public void OpenURL(string URL)
         {
-            StartCoroutine(OpenWeb(URL, false));
+            Application.OpenURL(URL);
         }
 
         public void OpenVideo(string URL)
         {
-            StartCoroutine(OpenWeb(URL, true));
+            StartCoroutine(DisplayVideo(URL));
         }
 
         public void OpenMail(string Receiver)
         {
             string MailString = "mailto:" + Receiver + "?subject=" + MyEscapeURL("") + "&body=" + MyEscapeURL("");
-            StartCoroutine(OpenWeb(MailString, false));
+            OpenURL(MailString);
         }
 
         #endregion // PUBLIC_METHODS
 
         #region PRIVATE_METHODS
 
-
-        private IEnumerator OpenWeb(string URL, bool PlayVideo)
+        private IEnumerator DisplayVideo(string URL)
         {
-            if (Application.internetReachability != NetworkReachability.NotReachable)
-            {
-                if (!DownloadWarningShown && PlayVideo && Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
-                {
-                    float time = 2.5f;
-                    StartCoroutine(ShowDownloadWarning(time));
-                    DownloadWarningShown = true;
-                    yield return new WaitForSeconds(time);
-                }
+            Screen.orientation = ScreenOrientation.LandscapeRight;
+            yield return new WaitForSeconds(0.5f);
 
-                if (PlayVideo)
-                {
-                    Screen.orientation = ScreenOrientation.LandscapeRight;
-                    yield return new WaitForSeconds(0.5f);
+            Handheld.PlayFullScreenMovie(URL, BgColor, ControlMode, ScalingMode);
 
-                    Handheld.PlayFullScreenMovie(URL, BgColor, ControlMode, ScalingMode);
-
-                    yield return new WaitForSeconds(3);
-                    Screen.orientation = ScreenOrientation.Portrait;
-                }
-                else
-                {
-                    Application.OpenURL(URL);
-                }
-            }
-            else
-            {
-                float time = 3;
-                StartCoroutine(ShowNoConnectionError(time));
-                yield return new WaitForSeconds(time);
-            }
-        }
-
-        private IEnumerator ShowDownloadWarning(float time)
-        {
-            if (ShowNotifications)
-            {
-                WLANWarningDisplay.SetActive(true);
-                yield return new WaitForSeconds(time);
-                WLANWarningDisplay.SetActive(false);
-            }
-        }
-
-        private IEnumerator ShowNoConnectionError(float time)
-        {
-            if (ShowNotifications)
-            {
-                NoConnectionDisplay.SetActive(true);
-                yield return new WaitForSeconds(time);
-                NoConnectionDisplay.SetActive(false);
-            }
+            yield return new WaitForSeconds(3);
+            Screen.orientation = ScreenOrientation.Portrait;
         }
 
         private string MyEscapeURL(string URL)
