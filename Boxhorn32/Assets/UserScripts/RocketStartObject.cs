@@ -15,7 +15,7 @@ public class RocketStartObject : MonoBehaviour
     {
         start = transform.position;
         liftoff = Time.time + 4.0f; // 4 Sekunden, initaler Timer
-        StartCoroutine(countdown(Time.time, liftoff));
+        StartCoroutine(countdown(liftoff));
     }
 
     // Update is called once per frame
@@ -33,13 +33,14 @@ public class RocketStartObject : MonoBehaviour
         }
     }
 
-    IEnumerator countdown(float start, float end)
+    IEnumerator countdown(float endTime)
     {
-        while (end > start)
+        while (endTime > Time.time)
         {
-            CountdownText.text = "" + (int)(end - start);
+            CountdownText.text = "" + (int)(endTime - Time.time);
             yield return new WaitForSeconds(0.2f);
         }
+        CountdownText.text = "";
     }
 
     IEnumerator resetRocket()
@@ -47,9 +48,9 @@ public class RocketStartObject : MonoBehaviour
         yield return new WaitForSeconds(FlightTime);
         Turbine.velocity = Vector3.zero;
         Debug.Log("RESET");
-        liftoff = Time.time + 10.0f;	// 10 Sekunden zwischen weiteren Starts
+        liftoff = Time.time + 10.5f;	// 10 Sekunden zwischen weiteren Starts
         transform.position = start;
         resetInitiated = false;
-        StartCoroutine(countdown(Time.time, liftoff));
+        StartCoroutine(countdown(liftoff));
     }
 }
