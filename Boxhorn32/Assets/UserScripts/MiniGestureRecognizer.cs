@@ -8,6 +8,8 @@ public class MiniGestureRecognizer : MonoBehaviour
 
     public GameObject OnSwipeRight;
 
+    public GameObject OnSwipeDown;
+
     public GameObject ToDeactivate;
 
 
@@ -66,12 +68,18 @@ public class MiniGestureRecognizer : MonoBehaviour
                             {
                                 if (swipeType.x > 0.0f)
                                 {
-                                    ToDeactivate.SetActive(false);
-                                    OnSwipeLeft.SetActive(true);
+                                    if (OnSwipeLeft != null)
+                                    {
+                                        ToDeactivate.SetActive(false);
+                                        OnSwipeLeft.SetActive(true);
+                                    }
                                 }
                                 else {
-                                    ToDeactivate.SetActive(false);
-                                    OnSwipeRight.SetActive(true);
+                                    if (OnSwipeRight != null)
+                                    {
+                                        ToDeactivate.SetActive(false);
+                                        OnSwipeRight.SetActive(true);
+                                    }
                                 }
                             }
 
@@ -82,7 +90,11 @@ public class MiniGestureRecognizer : MonoBehaviour
                                     // MOVE UP
                                 }
                                 else {
-                                    // MOVE DOWN
+                                    if (OnSwipeDown != null)
+                                    {
+                                        ToDeactivate.SetActive(false);
+                                        OnSwipeDown.SetActive(true);
+                                    }
                                 }
                             }
 

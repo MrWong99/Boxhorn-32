@@ -74,6 +74,7 @@ namespace Vuforia
                                         TrackableBehaviour.Status previousStatus,
                                         TrackableBehaviour.Status newStatus)
         {
+            GameObject scanScreen = GameObject.FindGameObjectWithTag("ScanUI");
             if (newStatus == TrackableBehaviour.Status.DETECTED ||
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -82,7 +83,7 @@ namespace Vuforia
                 {
                     OpenVideo(URL);
                 }
-                else if (!QueuedLinks.Contains(URL))
+                else if (!QueuedLinks.Contains(URL) && scanScreen.activeSelf)
                 {
                     QueuedLinks.Push(URL);
                 }
