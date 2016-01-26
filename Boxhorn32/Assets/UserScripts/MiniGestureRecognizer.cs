@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System;
+using Vuforia;
 
 public class MiniGestureRecognizer : MonoBehaviour
 {
