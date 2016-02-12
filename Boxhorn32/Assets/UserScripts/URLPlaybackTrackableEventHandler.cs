@@ -18,15 +18,19 @@ namespace Vuforia
     {
         #region PRIVATE_MEMBER_VARIABLES
 
-        private TrackableBehaviour mTrackableBehaviour;
+        private static float LastOpenTime;
 
-        private static bool DownloadWarningShown = false;
+        private const float OpenDelay = 2f;
+
+        private TrackableBehaviour mTrackableBehaviour;
 
         private Color BgColor = new Color(155, 185, 255, 0);
 
         private FullScreenMovieControlMode ControlMode = FullScreenMovieControlMode.Full;
 
         private FullScreenMovieScalingMode ScalingMode = FullScreenMovieScalingMode.AspectFit;
+
+        private static Stack QueuedLinks = new Stack();
 
         #endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -49,6 +53,15 @@ namespace Vuforia
             }
         }
 
+        void Update()
+        {
+            if (Time.time > LastOpenTime + OpenDelay && QueuedLinks.Count > 0)
+            {
+                Application.OpenURL((string)QueuedLinks.Pop());
+                LastOpenTime = Time.time;
+            }
+        }
+
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
 
         #region PUBLIC_METHODS
@@ -61,6 +74,7 @@ namespace Vuforia
                                         TrackableBehaviour.Status previousStatus,
                                         TrackableBehaviour.Status newStatus)
         {
+            GameObject scanScreen = GameObject.FindGameObjectWithTag("ScanUI");
             if (newStatus == TrackableBehaviour.Status.DETECTED ||
                 newStatus == TrackableBehaviour.Status.TRACKED ||
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -68,9 +82,10 @@ namespace Vuforia
                 if (PlayVideo)
                 {
                     OpenVideo(URL);
-                } else
+                }
+                else if (!QueuedLinks.Contains(URL) && scanScreen.activeSelf)
                 {
-                    OpenURL(URL);
+                    QueuedLinks.Push(URL);
                 }
             }
         }

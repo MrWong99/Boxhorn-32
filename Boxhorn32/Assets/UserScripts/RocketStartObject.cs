@@ -6,6 +6,7 @@ public class RocketStartObject : MonoBehaviour
     public float FlightTime;
     public Rigidbody Turbine;
     public TextMesh CountdownText;
+    public AudioSource CountdownAudio;
     Vector3 start;
     private float liftoff;
     private bool resetInitiated = false;
@@ -14,7 +15,7 @@ public class RocketStartObject : MonoBehaviour
     void Start()
     {
         start = transform.position;
-        liftoff = Time.time + 4.0f; // 4 Sekunden, initaler Timer
+        liftoff = Time.time + 1.0f; // 4 Sekunden, initaler Timer
         StartCoroutine(countdown(liftoff));
     }
 
@@ -33,12 +34,35 @@ public class RocketStartObject : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        if (CountdownAudio != null && CountdownAudio.isPlaying)
+        {
+            CountdownAudio.Stop();
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (CountdownAudio != null && CountdownAudio.isPlaying)
+        {
+            CountdownAudio.Stop();
+        }
+    }
+
     IEnumerator countdown(float endTime)
     {
+        CountdownAudio.Play();
+        bool doOnce = true;
         while (endTime > Time.time)
         {
             CountdownText.text = "" + (int)(endTime - Time.time);
             yield return new WaitForSeconds(0.2f);
+            if (doOnce && endTime - Time.time < 6)
+            {
+                endTime += 0.7f;
+                doOnce = false;
+            }
         }
         CountdownText.text = "";
     }
@@ -50,6 +74,7 @@ public class RocketStartObject : MonoBehaviour
         Debug.Log("RESET");
         liftoff = Time.time + 10.5f;	// 10 Sekunden zwischen weiteren Starts
         transform.position = start;
+        CountdownAudio.Stop();
         resetInitiated = false;
         StartCoroutine(countdown(liftoff));
     }
